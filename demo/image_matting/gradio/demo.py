@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 from src.models.modnet import MODNet
+
 import gradio as gr
 
 ref_size = 512
@@ -63,22 +64,28 @@ def inference(im):
     # resize and save matte
     matte = F.interpolate(matte, size=(im_h, im_w), mode='area')
     matte = matte[0][0].data.cpu().numpy()
-    matte = np.repeat(np.asarray(matte)[:, :, None], 3, axis=2) / 255
-    foreground = im_np * matte
-    return Image.fromarray(((foreground * 255).astype('uint8'))), matte * 255
+    matte = matte.round()
+    matte = np.repeat(np.asarray(matte)[:, :, None], 3, axis=2)
+    foreground = np.where(matte, im_np, 255)
+    return Image.fromarray(foreground.astype('uint8')), matte
 
 
 inputs = gr.inputs.Image(label="Portrait Image")
 outputs = [gr.outputs.Image(label="Matted Image"), gr.outputs.Image(label="Alpha Image")]
 
 title = "MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting?"
-description = "This is a demo of MODNet, a trimap-free model for portrait matting in real time. For more information, see the links" \
-              " in the bottom. Try it by uploading your own image or clicking one of the examples."
+description = "This is a demo of MODNet, a trimap-free model for portrait matting in real time. " \
+              "Try it by uploading your own image or clicking one of the examples. No image you upload is saved or " \
+              "stored anywhere. Check out the paper and repository (linked in the bottom)."
 examples = [
     ["example_images/1.jpg"],
     ["example_images/2.jpg"]
 ]
-article = "<p>Paper: <a href='https://arxiv.org/pdf/2011.11961.pdf'>Is a Green Screen Really Necessary for Real-Time " \
-          "Portrait Matting?</a></p> <p>Repo: <a href='https://github.com/ZHKKKe/MODNet'>https://github.com/ZHKKKe/MODNet</a></p>"
+article = "<p style='text-align: center'>This Demo is released under the <a href='https://creativecommons.org/licenses/" \
+          "by-nc-sa/4.0/deed.en_GB'>Creative Commons Attribution NonCommercial ShareAlike 4.0 license.</a></p>" \
+          "<p style='text-align: center'>Paper: <a href='https://arxiv.org/pdf/2011.11961.pdf'>Is a Green Screen " \
+          "Really Necessary for Real-Time " \
+          "Portrait Matting?</a></p> <p style='text-align: center'>Repo: <a href='https://github.com/ZHKKKe/MODNet'>" \
+          "https://github.com/ZHKKKe/MODNet</a></p>"
 gr.Interface(inference, inputs, outputs, title=title, description=description, examples=examples, article=article,
              allow_flagging=False).launch()
