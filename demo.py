@@ -64,9 +64,8 @@ def inference(im):
     # resize and save matte
     matte = F.interpolate(matte, size=(im_h, im_w), mode='area')
     matte = matte[0][0].data.cpu().numpy()
-    matte = matte.round()
-    matte = np.repeat(np.asarray(matte)[:, :, None], 3, axis=2)
-    foreground = np.where(matte, im_np, 255)
+    matte_mask = np.repeat(matte[:, :, None], 3, axis=2)
+    foreground = im_np * matte_mask + (1 - matte_mask) * 255
     return Image.fromarray(foreground.astype('uint8')), matte
 
 
