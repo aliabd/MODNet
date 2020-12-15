@@ -73,14 +73,14 @@ inputs = gr.inputs.Image(label="Portrait Image")
 outputs = [gr.outputs.Image(label="Matted Image"), gr.outputs.Image(label="Alpha Image")]
 
 title = "MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting?"
-description = "This is a demo of MODNet, a trimap-free model for portrait matting in real time. " \
-              "Try it by uploading your own image or clicking one of the examples. No image you upload is saved or " \
-              "stored anywhere. Check out the paper and repository (linked in the bottom)."
+description = "This is a portrait image matting demo based on MODNet. Try it by uploading your image or clicking one of " \
+              "the examples. The uploaded image will not be saved or stored anywhere. Please check out the paper and " \
+              "repository for more details (linked at the bottom)."
 examples = [
     ["example_images/1.jpg"],
     ["example_images/2.jpg"]
 ]
-article = "<p style='text-align: center'>This Demo is released under the <a href='https://creativecommons.org/licenses/" \
+article = "<p style='text-align: center'>This demo is released under the <a href='https://creativecommons.org/licenses/" \
           "by-nc-sa/4.0/deed.en_GB'>Creative Commons Attribution NonCommercial ShareAlike 4.0 license.</a></p>" \
           "<p style='text-align: center'>Paper: <a href='https://arxiv.org/pdf/2011.11961.pdf'>Is a Green Screen " \
           "Really Necessary for Real-Time " \
