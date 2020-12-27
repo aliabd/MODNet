@@ -64,13 +64,15 @@ def inference(im):
     # resize and save matte
     matte = F.interpolate(matte, size=(im_h, im_w), mode='area')
     matte = matte[0][0].data.cpu().numpy()
-    matte_mask = np.repeat(matte[:, :, None], 3, axis=2)
-    foreground = im_np * matte_mask + (1 - matte_mask) * 255
-    return Image.fromarray(foreground.astype('uint8')), matte
+    # matte_mask = np.repeat(matte[:, :, None], 3, axis=2)
+    # foreground = im_np * matte_mask + (1 - matte_mask) * 255
+    foreground = np.concatenate((im_np, matte[:, :, None] * 255), axis=2)
+    foreground = Image.fromarray(foreground.astype('uint8'))
+    return foreground, matte
 
 
 inputs = gr.inputs.Image(label="Portrait Image")
-outputs = [gr.outputs.Image(label="Matted Image"), gr.outputs.Image(label="Alpha Image")]
+outputs = [gr.outputs.Image(label="Foreground Image"), gr.outputs.Image(label="Alpha Image")]
 
 title = "MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting?"
 description = "This is a portrait image matting demo based on MODNet. Try it by uploading your image or clicking one of " \
