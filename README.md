@@ -1,6 +1,6 @@
 <h2 align="center">MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting?</h2>
 
-<img src="doc/gif/homepage_demo.gif" width="100%">
+<img src="https://github.com/aliabd/modnet/blob/master/doc/gif/homepage_demo.gif?raw=true" width="100%">
 
 <p align="center">
   <a href="https://arxiv.org/pdf/2011.11961.pdf">Arxiv Preprint</a> |
@@ -30,7 +30,7 @@ If you have an Ubuntu system, we recommend you to try the [offline demo](demo/vi
 We provide an [online Colab demo](https://colab.research.google.com/drive/1GANpbKT06aEFiW-Ssx0DQnnEADcXwQG6?usp=sharing) for portrait image matting.  
 It allows you to upload portrait images and predict/visualize/download the alpha mattes. 
 
-<img src="doc/gif/image_matting_demo.gif">
+<img src="https://github.com/aliabd/modnet/blob/master/doc/gif/image_matting_demo.gif?raw=true">
 
 
 ## TO DO
