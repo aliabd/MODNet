@@ -1,6 +1,6 @@
 <h2 align="center">MODNet: Is a Green Screen Really Necessary for Real-Time Portrait Matting?</h2>
 
-<img src="doc/gif/homepage_demo.gif" width="100%">
+<img src="/file/doc/gif/homepage_demo.gif" width="100%">
 
 <p align="center">
   <a href="https://arxiv.org/pdf/2011.11961.pdf">Arxiv Preprint</a> |

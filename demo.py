@@ -82,11 +82,8 @@ examples = [
     ["example_images/1.jpg"],
     ["example_images/2.jpg"]
 ]
-article = "<p style='text-align: center'>This demo is released under the <a href='https://creativecommons.org/licenses/" \
-          "by-nc-sa/4.0/deed.en_GB'>Creative Commons Attribution NonCommercial ShareAlike 4.0 license.</a></p>" \
-          "<p style='text-align: center'>Paper: <a href='https://arxiv.org/pdf/2011.11961.pdf'>Is a Green Screen " \
-          "Really Necessary for Real-Time " \
-          "Portrait Matting?</a></p> <p style='text-align: center'>Repo: <a href='https://github.com/ZHKKKe/MODNet'>" \
-          "https://github.com/ZHKKKe/MODNet</a></p>"
+
+article = "http://raw.githubusercontent.com/aliabd/modnet/master/README.md"
+
 gr.Interface(inference, inputs, outputs, title=title, description=description, examples=examples, article=article,
-             allow_flagging=False).launch()
+             allow_flagging=False).launch(share=True)
